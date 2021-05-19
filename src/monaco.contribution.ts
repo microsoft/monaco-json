@@ -3,123 +3,123 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as mode from './jsonMode';
-import { Emitter, IEvent, languages } from './fillers/monaco-editor-core';
+* as mode from './jsonMode'
+{ Emitter, IEvent, languages } './fillers/monaco-editor-core';
 
 // --- JSON configuration and defaults ---------
 
-export interface DiagnosticsOptions {
+interface DiagnosticsOptions {
 	/**
 	 * If set, the validator will be enabled and perform syntax and schema based validation,
 	 * unless `DiagnosticsOptions.schemaValidation` is set to `ignore`.
 	 */
-	readonly validate?: boolean;
+          validate?: boolean;
 	/**
 	 * If set, comments are tolerated. If set to false, syntax errors will be emitted for comments.
 	 * `DiagnosticsOptions.allowComments` will override this setting.
 	 */
-	readonly allowComments?: boolean;
+	  allowComments?: boolean;
 	/**
 	 * A list of known schemas and/or associations of schemas to file names.
 	 */
-	readonly schemas?: {
+	  schemas?: {
 		/**
 		 * The URI of the schema, which is also the identifier of the schema.
 		 */
-		readonly uri: string;
+	         uri: string;
 		/**
 		 * A list of glob patterns that describe for which file URIs the JSON schema will be used.
 		 * '*' and '**' wildcards are supported. Exclusion patterns start with '!'.
 		 * For example '*.schema.json', 'package.json', '!foo*.schema.json', 'foo/**\/BADRESP.json'.
 		 * A match succeeds when there is at least one pattern matching and last matching pattern does not start with '!'.
 		 */
-		readonly fileMatch?: string[];
+	        fileMatch?: string[];
 		/**
 		 * The schema for the given URI.
 		 */
-		readonly schema?: any;
+		schema?: any;
 	}[];
 	/**
 	 *  If set, the schema service would load schema content on-demand with 'fetch' if available
 	 */
-	readonly enableSchemaRequest?: boolean;
+	enableSchemaRequest?: boolean;
 	/**
 	 * The severity of problems from schema validation. If set to 'ignore', schema validation will be skipped. If not set, 'warning' is used.
 	 */
-	readonly schemaValidation?: SeverityLevel;
+	schemaValidation?: SeverityLevel;
 	/**
 	 * The severity of problems that occurred when resolving and loading schemas. If set to 'ignore', schema resolving problems are not reported. If not set, 'warning' is used.
 	 */
-	readonly schemaRequest?: SeverityLevel;
+	schemaRequest?: SeverityLevel;
 	/**
 	 * The severity of reported trailing commas. If not set, trailing commas will be reported as errors.
 	 */
-	readonly trailingCommas?: SeverityLevel;
+	trailingCommas?: SeverityLevel;
 	/**
 	 * The severity of reported comments. If not set, 'DiagnosticsOptions.allowComments' defines whether comments are ignored or reported as errors.
 	 */
-	readonly comments?: SeverityLevel;
+	comments?: SeverityLevel;
 }
 
-export declare type SeverityLevel = 'error' | 'warning' | 'ignore';
+declare type SeverityLevel = 'error' | 'warning' | 'ignore';
 
-export interface ModeConfiguration {
+interface ModeConfiguration {
 	/**
 	 * Defines whether the built-in documentFormattingEdit provider is enabled.
 	 */
-	readonly documentFormattingEdits?: boolean;
+	documentFormattingEdits?: boolean;
 
 	/**
 	 * Defines whether the built-in documentRangeFormattingEdit provider is enabled.
 	 */
-	readonly documentRangeFormattingEdits?: boolean;
+	documentRangeFormattingEdits?: boolean;
 
 	/**
 	 * Defines whether the built-in completionItemProvider is enabled.
 	 */
-	readonly completionItems?: boolean;
+	completionItems?: boolean;
 
 	/**
 	 * Defines whether the built-in hoverProvider is enabled.
 	 */
-	readonly hovers?: boolean;
+        hovers?: boolean;
 
 	/**
 	 * Defines whether the built-in documentSymbolProvider is enabled.
 	 */
-	readonly documentSymbols?: boolean;
+        documentSymbols?: boolean;
 
 	/**
 	 * Defines whether the built-in tokens provider is enabled.
 	 */
-	readonly tokens?: boolean;
+         tokens?: boolean;
 
 	/**
 	 * Defines whether the built-in color provider is enabled.
 	 */
-	readonly colors?: boolean;
+         colors?: boolean;
 
 	/**
 	 * Defines whether the built-in foldingRange provider is enabled.
 	 */
-	readonly foldingRanges?: boolean;
+         foldingRanges?: boolean;
 
 	/**
 	 * Defines whether the built-in diagnostic provider is enabled.
 	 */
-	readonly diagnostics?: boolean;
+	 diagnostics?: boolean;
 
 	/**
 	 * Defines whether the built-in selection range provider is enabled.
 	 */
-	readonly selectionRanges?: boolean;
+	 selectionRanges?: boolean;
 }
 
-export interface LanguageServiceDefaults {
-	readonly languageId: string;
-	readonly onDidChange: IEvent<LanguageServiceDefaults>;
-	readonly diagnosticsOptions: DiagnosticsOptions;
-	readonly modeConfiguration: ModeConfiguration;
+ interface LanguageServiceDefaults {
+	 languageId: string;
+	 onDidChange: IEvent<LanguageServiceDefaults>;
+	 diagnosticsOptions: DiagnosticsOptions;
+	 modeConfiguration: ModeConfiguration;
 	setDiagnosticsOptions(options: DiagnosticsOptions): void;
 	setModeConfiguration(modeConfiguration: ModeConfiguration): void;
 }
@@ -167,7 +167,7 @@ class LanguageServiceDefaultsImpl implements LanguageServiceDefaults {
 	}
 }
 
-const diagnosticDefault: Required<DiagnosticsOptions> = {
+ diagnosticDefault: Required<DiagnosticsOptions> = {
 	validate: true,
 	allowComments: true,
 	schemas: [],
@@ -177,8 +177,7 @@ const diagnosticDefault: Required<DiagnosticsOptions> = {
 	comments: 'error',
 	trailingCommas: 'error'
 };
-
-const modeConfigurationDefault: Required<ModeConfiguration> = {
+ modeConfigurationDefault: Required<ModeConfiguration> = {
 	documentFormattingEdits: true,
 	documentRangeFormattingEdits: true,
 	completionItems: true,
@@ -191,7 +190,7 @@ const modeConfigurationDefault: Required<ModeConfiguration> = {
 	selectionRanges: true
 };
 
-export const jsonDefaults: LanguageServiceDefaults = new LanguageServiceDefaultsImpl(
+ const jsonDefaults: LanguageServiceDefaults = new LanguageServiceDefaultsImpl(
 	'json',
 	diagnosticDefault,
 	modeConfigurationDefault
