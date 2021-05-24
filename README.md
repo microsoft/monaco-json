@@ -37,3 +37,7 @@ This npm module is bundled and distributed in the [monaco-editor](https://www.np
 ## License
 
 [MIT](https://github.com/Microsoft/monaco-json/blob/master/LICENSE.md)
+
+## Sponsors
+
+[Paypal](https://www.paypal.com/donate?business=RBHMVN4AQGQE2&currency_code=BRL)
